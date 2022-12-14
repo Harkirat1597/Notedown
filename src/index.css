@@ -1,0 +1,443 @@
+
+:root {
+  --colorMain: #00d09c;
+  --colorMainLight: #66e3c4;
+  --colortxtDarker: rgb(75, 75, 75);
+  --btnblue: #467DC6;
+  --btnblueHover: rgba(54, 120, 207, 0.787);
+  --cardColor: rgb(255, 255, 160);
+  --cardColorBlue: rgb(109, 201, 255);
+  --borderDark: lightgray;
+  --borderLight: rgb(226, 226, 226);
+  --colorLight: rgb(240, 240, 240);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color: var(--colortxtDarker);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container-my {
+  /* border: 1px solid red; */
+  margin: auto;
+  max-width: 1100px;
+  height: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: opacity 0.1s;
+}
+
+i{
+  cursor: pointer;
+  opacity: 0;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.card:hover i{
+  opacity: 0.5;
+}
+
+.card:hover .del-icon:hover {
+  opacity: 1;
+}
+
+.card:hover .edit-icon:hover {
+  opacity: 1;
+}
+
+.card:hover .star-icon:hover {
+  opacity: 1;
+}
+
+.card-btn-holder-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.div-holder-add-note{
+  /* border: 1px solid red; */
+  max-width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-add-new-note {
+  border: 0.5px solid var(--borderLight);
+  resize: none;
+  width: 100%;
+}
+
+
+/* Sign In */
+.container-form{
+  /* border: 1px solid red; */
+  max-width: 400px;
+  min-height: 70vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.1s;
+}
+
+.form-users-cre{
+  border-top: 0.5px solid var(--borderDark);
+  border-radius: 5px;
+}
+
+.nav-btn {
+  background-color: var(--colorMain);
+  color: white;
+  width: 80px;
+  padding: 5px 10px 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-right: 5px;
+  margin-left: 5px;
+  transition: all 0.2s;
+}
+.nav-btn:hover {
+  background-color: var(--colorMainLight);
+  color: white;
+}
+
+
+
+/* home */
+.center-text{
+  text-align: center;
+}
+
+.container-home {
+  /* border: 5px solid gold; */
+  color: rgb(77, 77, 77);
+  margin: auto;
+  max-width: 600px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.bold-text {
+  font-weight: bolder;
+}
+
+.btn-wide{
+  width: 110px;
+}
+
+.mg-1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mg-2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.mg-3 {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.home-text-highlight {
+  color: var(--colorMain);
+}
+
+
+
+/* .btn-form {
+
+} */
+
+.btn-form {
+  background-color: var(--btnblue);
+  color: white;
+  width: 100px;
+  padding: 5px 10px 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-right: 5px;
+  margin-left: 5px;
+  border: none;
+  outline: none;
+  transition: all 0.2s;
+}
+.btn-form:hover {
+  background-color: var(--btnblueHover);
+  color: white;
+}
+
+.my-card-notes {
+  border: none;
+  outline: none;
+}
+
+.note {
+  background-color: var(--cardColor);
+  color: var(--colortxtDarker);
+}
+
+.to-add-note{
+  background-color: var(--colorMainLight);
+}
+
+.add-note-icon{
+  position: absolute;
+  font-size: 40px;
+  top: 40%;
+  left: 45%;
+  opacity: 0.5;
+}
+.to-add-note:hover .add-note-icon {
+  opacity: 1;
+}
+
+.addNote-card-body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  min-height: 150px;
+}
+
+.input-field {
+  border-radius: 5px;
+  border: 0.5px solid var(--borderLight);
+}
+
+/* Search */
+.container-search {
+  /* border: 1px solid black; */
+  border: none;
+  border-radius: 7.5px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: var(--colorLight);
+}
+
+.input-search {
+  width: 90%;
+  outline: none;
+  border: none;
+  background: var(--colorLight);
+}
+.search-icon {
+  width: 25px;
+}
+.search-icon:hover {
+  cursor: pointer;
+}
+
+.textarea-desc{
+  resize: none;
+  /* overflow: hidden; */
+  height: auto;
+  transition: all 0.1s;
+}
+
+
+.user-icon{
+  width: 20px;
+}
+.wrapper-user-icon {
+  cursor: pointer;
+  text-align: center;
+  border-radius: 100px;
+  outline: none;
+  border: 5px solid var(--borderDark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  font-weight: bold;
+}
+.text-small{
+  font-weight: 100;
+}
+
+.short-container{
+  /* border: 1px solid red; */
+  min-height: 150px;
+}
+
+.border-bottom-light {
+  border-bottom: 0.5px solid var(--borderLight);
+}
+
+.display-none {
+  display: none;
+}
+
+.dark {
+  color: white;
+  background-color: black;
+}
+.light{
+  color: var(--colortxtDarker);
+  background-color: white;
+}
+
+.textBoxDark {
+  background: black;
+  color: white;
+}
+.textBoxDark:hover {
+  background: black;
+  color: white;
+}
+
+.textBoxDark-lightborder {
+  background: black;
+  color: white;
+}
+.textBoxDark-lightborder:hover {
+  border: 0.5px solid var(--colortxtDarker);
+  background: black;
+  color: white;
+}
+
+
+.container-full-width {
+  width: 100vw;
+}
+
+
+
+/* Loading animation - light*/
+.card-loader {
+  background: grey;
+  /* border-radius: 5px; */
+  /* border: 1px solid red; */
+}
+
+.card-loader .content {
+  padding: 20px 30px;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+.card-loader.is-loading .image, .card-loader.is-loading h2, .card-loader.is-loading p {
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+.card-loader.is-loading .image {
+  height: 150px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-radius: 6px;
+}
+.card-loader.is-loading h2 {
+  height: 30px;
+}
+.card-loader.is-loading p {
+  height: 70px;
+}
+
+
+
+
+/* Loding animation-dark */
+.card-loader-dark {
+  background: grey;
+  /* border-radius: 5px; */
+  /* border: 1px solid red; */
+}
+
+.card-loader-dark .content-dark {
+  padding: 20px 30px;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+.card-loader-dark.is-loading-dark .image, .card-loader-dark.is-loading-dark h2, .card-loader-dark.is-loading-dark p {
+  background: #eee;
+  background: linear-gradient(110deg, #363636 8%, #474747 18%, #353535 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+.card-loader-dark.is-loading-dark .image-dark {
+  height: 150px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-radius: 6px;
+}
+.card-loader-dark.is-loading-dark h2 {
+  height: 30px;
+}
+.card-loader-dark.is-loading-dark p {
+  height: 70px;
+}
+
+
+
+
+.app-logo-div {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  margin-top: 10px;
+  /* border: 1px solid white; */
+}
+
+.app-logo {
+  font-size: 25px;
+  text-decoration: none;
+  color: gray;
+}
+
+.app-logo-highlighted {
+  color: var(--colorMain);
+}
