@@ -1,13 +1,15 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import AlertContext from '../Context/alert/AlertContext';
+import noteContext from '../Context/notes/NoteContext';
 
-const ChangePassword = (props) => {
-    const {setFlag, mode} = props;
+const ChangePassword = ({ setFlag, mode }) => {
+    const { changePassword } = useContext(noteContext);
 
-    const [input, setInput] = useState({oldpass: "", newpass: "", confirmpass: ""});
-
-    const alertContext = useContext(AlertContext);
-    const {setAlert} = alertContext;
+    const oldPassRef = useRef();
+    const NewPassRef = useRef();
+    const confirmPassRef = useRef(); 
+    
+    const { setAlert } = useContext(AlertContext);
 
     const helperClose = (e) => {
         setTimeout(() => {
@@ -18,45 +20,18 @@ const ChangePassword = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (input.newpass !== input.confirmpass) {
+        if (NewPassRef.current.value !== confirmPassRef.current.value) {
             const errMsg = "Password and confirm password do not match.";
             setAlert({message: errMsg, type:"danger"});
             return;
         }
 
-        const details = JSON.parse(localStorage.getItem('userdetails'));
-        const authtoken = localStorage.getItem('auth');
+        const res = await changePassword(oldPassRef.current.value, NewPassRef.current.value); 
 
-        const res = await fetch(`https://jupyter-poydg.run-ap-south1.goorm.io/api/auth/changePassword`, {
-            method: "PUT",
-            
-            // Adding body or contents to send
-            body: JSON.stringify({
-                oldpass: `${input.oldpass}`,
-                newpass: `${input.newpass}`,
-                email: `${details.email}`
-            }),
-             
-            // Adding headers to the request
-            headers: {
-                "auth-token": authtoken,
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        });
-        const response = await res.json();
+        if (!res.success) return setAlert({message: res.error, type: "danger"});
 
-        if (response.success) {
-            setAlert({message: response.message, type:"success"});
-            helperClose(e);
-        } else {
-            setAlert({message: response.error, type: "danger"});
-        }
-        return;
-    }
-
-    const handleChange = (e) => {
-        setInput({...input, [e.target.name] : e.target.value});
-        console.log(input);
+        setAlert({message: res.message, type:"success"});
+        return helperClose(e);
     }
 
     return (
@@ -69,17 +44,20 @@ const ChangePassword = (props) => {
                 
                     <div className="mb-3">
                         <input type="text" className={`form-control ${mode.current === "dark"? "textBoxDark": ""}`} name="oldpass" id="oldpass" placeholder='Old password' required 
-                    onChange={handleChange}/>
+                        ref={oldPassRef}    
+                    />
                     </div>
                     
                     <div className="mb-3">
                         <input type="password" className={`form-control ${mode.current === "dark"? "textBoxDark": ""}`} name="newpass" id="newpass" placeholder='New password' required 
-                    onChange={handleChange}/>
+                        ref={NewPassRef}    
+                    />
                     </div>
                     
                     <div className="mb-3">
                         <input type="password" className={`form-control ${mode.current === "dark"? "textBoxDark": ""}`} name="confirmpass" id="confirmpass" placeholder='Confirm password' required 
-                    onChange={handleChange}/>
+                        ref={confirmPassRef}    
+                    />
                     </div>
                 
                 </div>

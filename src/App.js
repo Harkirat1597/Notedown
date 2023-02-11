@@ -1,6 +1,6 @@
 import './App.css';
-import React, {useState, useEffect} from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter } from "react-router-dom";
 
 import Animate from './Components/Animate.js';
 import Navbar from './Components/Navbar.js';

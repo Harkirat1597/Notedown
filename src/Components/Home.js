@@ -1,33 +1,25 @@
-import React from 'react';
-import {Link } from 'react-router-dom';
-import {motion} from 'framer-motion';
-
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import noteContext from '../Context/notes/NoteContext.js';
 import Notes from './Notes.js';
 
-const Home = (props) => {
-    const {mode} = props;
+const Home = ({ mode }) => {
+    const { authToken } = useContext(noteContext);
 
     return (
         <motion.div
-
-        initial={{opacity: 0 }}
-        animate={{opacity: 1, transition: {duration: 0.5} }}
-        exit={{opacity: 0,  transition: {duration: 0} }}
+            initial={{opacity: 0 }}
+            animate={{opacity: 1, transition: {duration: 0.5} }}
+            exit={{opacity: 0,  transition: {duration: 0} }}
         >
-            {
-            
-            localStorage.getItem('auth') ?
-
+            {authToken ?
                 <div className="container-my mt-3">
                     <Notes mode={mode}/>
                 </div>
 
                 :
 
-                // <div className="container-home">
-                //     <h1 className='mg-3 center-text'>Welcome to <span className="home-text-highlight">NoteDown</span></h1>
-                //     <Link className="nav-btn btn-wide my-2" to="/signup">Start now</Link>
-                // </div>
                 <>
                     <div className={`container-home ${mode.current === "dark"? "dark": ""}`} >
                         <h2 className='center-text'>
@@ -42,9 +34,7 @@ const Home = (props) => {
                             </p>
                         </div>
                         <Link className="nav-btn btn-wide my-2" to="/signup">Start now</Link>
-                    </div>
-                    
-                {/* <div className="container-full-width" style={{border: "1px solid blue"}}></div> */}
+                    </div>                   
                 </>
             }
         </motion.div>

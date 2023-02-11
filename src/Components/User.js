@@ -6,31 +6,22 @@ import AlertContext from '../Context/alert/AlertContext';
 import NoteContext from '../Context/notes/NoteContext.js';
 import ChangePassword from './ChangePassword';
 
-const User = (props) => {
-    const {mode, setMode} = props;
-
-    const alertContext = useContext(AlertContext);
-    const {setAlert} = alertContext;
-
-    const noteContext = useContext(NoteContext);
-    const {clearAllPreviousData} = noteContext;
-
-    const [user, setUser] = useState({username: "", email: ""});
-    const [flag, setFlag] = useState(false);
-
-    const toggleRef = useRef();
-
+const User = ({ mode, setMode }) => {
     const navigate = useNavigate();
 
-    const details = JSON.parse(localStorage.getItem('userdetails'));
+    const toggleRef = useRef();
+    
+    const { setAlert } = useContext(AlertContext);
+    const { signOut, user } = useContext(NoteContext);
+
+    const [click, setClick] = useState(true);
+    const [flag, setFlag] = useState(false);
 
     useEffect(() => {
         modeSettings();
     }, []);
 
     const modeSettings = () => {
-        setUser({username: details.username, email: details.email});
-        
         // Setting up basic settings if Mode is dark...
         if (mode.current === "dark") {
             toggleRef.current.checked = true;
@@ -44,11 +35,8 @@ const User = (props) => {
         else setFlag(true);
     }
 
-    const [click, setClick] = useState(true);
     // false = "light" | true = "dark"
     const handleModeChange = (e) => {
-        // var isChecked = e.target.checked;
-        // console.log(isChecked);
         if (click === true) {
             setClick(false);
             setMode({current: "dark"});
@@ -65,23 +53,17 @@ const User = (props) => {
     }
 
     const handleSignOut = () => {
-        localStorage.removeItem('auth');
-        // localStorage.removeItem('expiry');
-        localStorage.removeItem('userdetails');
-        setAlert({message: "See you soon", type: "success"});
-        clearAllPreviousData();
-        navigate('/signin');
+        const res = signOut();
+        setAlert({message: res.message, type: "success"});
+        navigate("/");
     }
 
     return (
         <motion.div 
             className='container-my'
-
             initial={{opacity: 0 }}
             animate={{opacity: 1, transition: {duration: 0.5} }}
             exit={{opacity: 0,  transition: {duration: 0} }}
-
-  
         >
 
             <div className='short-container border-bottom-light'>

@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation } from "react-router-dom";
+import noteContext from '../Context/notes/NoteContext';
 
-const Navbar = (props) => {
-    const {mode} = props;
-
+const Navbar = ( { mode } ) => {
     let location = useLocation();
-
-    const user = JSON.parse(localStorage.getItem('userdetails'));
+    const { authToken, user } = useContext(noteContext);
 
     return (
         <nav className={`navbar navbar-expand-lg  ${mode.current === "light"? "navbar-light bg-light" : "navbar-dark bg-dark"}`} >
@@ -30,7 +28,7 @@ const Navbar = (props) => {
                         </li>
                     </ul>
 
-                    {localStorage.getItem('auth') ? 
+                    {authToken ? 
                         <div className='d-flex'>
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item" style={{paddingRight: "20px"}}>

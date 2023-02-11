@@ -9,10 +9,10 @@ const SignUp = (props) => {
     const {mode} = props;
 
     const alertContext = useContext(AlertContext);
-    const{setAlert} = alertContext;
+    const {setAlert} = alertContext;
 
     const context = useContext(NoteContext);
-    const {createAccount } = context;
+    const { createAccount, signIn } = context;
 
     const navigate = useNavigate();
 
@@ -27,38 +27,19 @@ const SignUp = (props) => {
             return;
         }
 
-        const create = await createAccount(input);
+        const res_createUser = await createAccount(input);
 
-        if (!create) return setAlert({message: `Please try again`, type:"danger"});
+        if (!res_createUser.success) return setAlert({message: res_createUser.error, type:"danger"});
 
-        const res = await fetch(`https://jupyter-poydg.run-ap-south1.goorm.io/api/auth/sign-in`, {
-        method: "POST",        
-        // Adding body or contents to send
-        body: JSON.stringify({
-            email: `${input.email}`,
-            password: `${input.password}`
-        }),
-        // Adding headers to the request
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
+        const res_signIn = await signIn({email: input.email, password: input.password});
+
+        if (res_signIn.success) {
+            setAlert({message: `Hi ${res_signIn.userDetails.username.split(" ")[0]}`, type:"success"});
+            navigate("/");
+            return;
         }
-        });
 
-        const response = await res.json();
-        
-        if (response.success) {
-            // redirect to the user's notes
-            
-            localStorage.setItem('auth', response.jsontoken);
-            localStorage.setItem('userdetails', JSON.stringify({username: response.userDetails.username, email: response.userDetails.email}));
-
-            setAlert({message: `Hi ${response.userDetails.username.split(" ")[0]}`, type:"success"});
-
-            navigate('/');
-        } else {
-            // display error message
-            setAlert({message:response.error, type:"danger"});
-        }
+        return setAlert({message: res_signIn.error, type:"danger"});
     }
 
     const handleChange = (e) => {
